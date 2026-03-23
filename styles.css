@@ -21,3 +21,13 @@
     box-shadow: 4px 8px #7dc44a;
     width: max-content;
  }
+ .erstellen{
+   position: fixed;
+   bottom: 60px;
+   left: 100px;
+ }
+ .löschen{
+   position: fixed;
+   bottom: 60px;
+   ri
+ }
