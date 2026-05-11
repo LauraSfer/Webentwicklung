@@ -1,4 +1,4 @@
-console.log('Hallo');
+//console.log('Hallo');
 
 
 /*let button = document.getElementById('Löschen');
@@ -90,7 +90,9 @@ function storeData(){
 function loadData(){
      let jsonPosts = localStorage.getItem("Notes");
      console.log("geladeneDaten " + jsonPosts);
-     Notizen = JSON.parse(jsonPosts);
+     if (jsonPosts) {
+        Notizen = JSON.parse(jsonPosts);
+     }
      Display();
     
 }
