@@ -41,17 +41,18 @@ function speichern(event){
 
 
 function Display(){
-   
-   /* button.className='löschenNachClick';*/
 
+    let Notes = document.querySelectorAll(".Note");
 
-    /*myPosts.push({
-        text: InputDeviceInfo.value
-    })
-    console.log(myPosts);*/
-    let Notes= document.querySelectorAll(".Note")
     for(let i = 0; i < Notes.length; i++){
-        Notes[i].textContent = Notizen[i].Text
+
+        // Prüfen ob die Notiz existiert
+        if(Notizen[i]){
+            Notes[i].textContent = Notizen[i].Text;
+        }
+        else{
+            Notes[i].textContent = "";
+        }
 
     }
 
@@ -63,15 +64,17 @@ function Display(){
 
 
 let Notizen = [
-    {Name: "Notiz1", Text: "hallo"},{Name: "Notiz2", Text: "Arzt 11 Uhr Mittwoch"},
-    {Name: "Notiz3", Text: "Webentwicklung abgeben"},
-    {Name: "Notiz4", Text: "Blumen auf Sonntag kaufen"},{Name: "Notiz5", Text: "Geburtstag Papa"},
-    {Name: "Notiz6", Text: "Friseurtermin Samstag 9 Uhr"},
-    {Name: "Notiz7", Text: "Oma Bahnhof abholen Donnerstag"}, 
-    {Name: "Notiz8", Text: "Heute Abend Müll rausstellen"}, 
-    {Name: "Notiz9", Text: "Regal aufbauen Sonntag mit Freunden"}, 
-    {Name: "Notiz10", Text: "Torte abholen ab Freitag"}, 
-    {Name: "Notiz11", Text:"Paket abholen"}
+    {Name: "Notiz1", Text: ""},{Name: "Notiz2", Text: ""},
+    {Name: "Notiz3", Text: ""},
+    {Name: "Notiz4", Text: ""},{Name: "Notiz5", Text: ""},
+    {Name: "Notiz6", Text: ""},
+    {Name: "Notiz7", Text: "Click & write on me :)"}, 
+    {Name: "Notiz8", Text: ""}, 
+    {Name: "Notiz9", Text: ""}, 
+    {Name: "Notiz10", Text: ""}, 
+    {Name: "Notiz11", Text:""}, 
+    {Name: "Notiz12", Text:""}, 
+    {Name: "Notiz13", Text:""}
 ]
 
 
@@ -84,6 +87,9 @@ function storeData(){
     let jsonPosts = JSON.stringify(Notizen);
     console.log(jsonPosts);
     localStorage.setItem("Notes", jsonPosts);
+    sendJsonWithPOST(
+  'http://localhost:3000/',
+  JSON.stringify(Notizen));
 }
 
 
@@ -97,6 +103,17 @@ function loadData(){
     
 }
 loadData();
+//localStorage.clear();
+
+async function sendJsonWithPOST(url, jsonString) {
+  const response = await fetch(url, {
+    method: 'POST',
+    body: jsonString,
+  });
+}
+
+
+
 
 
 
