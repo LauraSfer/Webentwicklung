@@ -61,6 +61,13 @@ function Display(){
 
 }
 
+async function getAllNotes() {
+  const response = await fetch('http://localhost:3000/');
+  const data = await response.json();
+  console.log(data);
+  Notizen = data;
+}
+
 
 
 let Notizen = [
@@ -86,19 +93,21 @@ let Notizen = [
 function storeData(){
     let jsonPosts = JSON.stringify(Notizen);
     console.log(jsonPosts);
-    localStorage.setItem("Notes", jsonPosts);
+    //localStorage.setItem("Notes", jsonPosts);
     sendJsonWithPOST(
   'http://localhost:3000/',
   JSON.stringify(Notizen));
 }
 
 
-function loadData(){
-     let jsonPosts = localStorage.getItem("Notes");
-     console.log("geladeneDaten " + jsonPosts);
+async function loadData(){
+    await getAllNotes()
+     //let jsonPosts = localStorage.getItem("Notes");
+    /* console.log("geladeneDaten " + jsonPosts);
      if (jsonPosts) {
         Notizen = JSON.parse(jsonPosts);
-     }
+     }*/
+     console.log(Notizen)
      Display();
     
 }
@@ -109,7 +118,7 @@ async function sendJsonWithPOST(url, jsonString) {
   const response = await fetch(url, {
     method: 'POST',
     body: jsonString,
-  });
+  }); //fetch kommunikation mit server
 }
 
 
